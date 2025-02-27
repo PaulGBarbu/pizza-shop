@@ -1,3 +1,16 @@
 <template>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor"><path d="M10.276 13c1.724 3-1.598 4.383-1.25 6.275c.406 2.214 2.713 3.367 4.454 2.355c2.467-1.435 1.415-6.827.432-8.61"/><path d="M12.015 2C7.343 2 3.538 4.648 3.02 9.031c-.725 6.131 18.635 4.44 17.963-.212C20.368 4.563 16.612 2 12.015 2"/><path d="M16 6c1 0 2 1 2 2"/></g></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+        <defs>
+            <path id="arcticonsEmojiMushroom0" fill="none" stroke="currentColor"
+                d="M42.5 24.296c0 6.541-8.283 6.662-18.5 6.662s-18.5-.12-18.5-6.662S13.783 7.271 24 7.271s18.5 10.484 18.5 17.025"
+                stroke-width="1" />
+        </defs>
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+            d="M17.435 30.867v8.835s-.087 1.005 1.87 1.005h8.709s1.668.294 1.668-1.273v-8.536" stroke-width="1" />
+        <use href="#arcticonsEmojiMushroom0" stroke-linecap="round" stroke-linejoin="round" />
+        <use href="#arcticonsEmojiMushroom0" stroke-linecap="round" stroke-linejoin="round" />
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+            d="M14.192 10.549s3.472 10.453-8.085 10.372c0 0 2.224-6.71 8.085-10.372m19.546 0s-3.472 10.453 8.084 10.372c0 0-2.223-6.71-8.084-10.372M18.065 21.476c-.002 2.525 2.654 4.573 5.932 4.574s5.937-2.045 5.938-4.57v-.004c0-2.525-2.657-4.572-5.935-4.572s-5.935 2.047-5.935 4.572"
+            stroke-width="1" />
+    </svg>
 </template>
