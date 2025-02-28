@@ -32,15 +32,15 @@ function activate() {
 
 <template>
     <button @click="activate">
-        <div class="p-2 rounded-xl h-28 w-28 border-2 border-black hover:bg-orange-100"
-            :class="{ 'bg-pink-400': isActive }">
-            <div class="flex justify-center">
-                <component :is="props.icon" class="h-11 w-11" />
+        <div class="p-2 rounded-xl h-28 w-28 border-2 border-black group"
+            :class="{ 'bg-pink-400 hover:bg-pink-400': isActive }">
+            <div class="flex justify-center group-hover:scale-125 group-hover:rotate-12 transition duration-200">
+                <component :is="props.icon" class="h-11 w-11 " />
             </div>
             <div class="font-bold mt-2">
                 {{ props.name }}
             </div>
-            +{{ props.price }}€
+            +{{ props.price.toFixed(2) }}€
         </div>
     </button>
 </template>
