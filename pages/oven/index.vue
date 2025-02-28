@@ -19,7 +19,7 @@ const toppings = shallowRef([
     Extras: {{ cartStore.getTotal.toFixed(2) }} €
     <div class="grid grid-cols-2 lg:grid-cols-4 w-fit gap-4 ">
         <div v-for="top in toppings">
-            <Toppings :name=top.name :price=top.price :icon=top.icon />
+            <Ingredient :name=top.name :price=top.price :icon=top.icon />
         </div>
     </div>
 </template>
