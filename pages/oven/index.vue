@@ -2,8 +2,9 @@
 import { IconsBacon, IconsCheese, IconsGarlic, IconsMushroom, IconsOnion, IconsPepperoni, IconsTomato } from '#components';
 
 
+const cartStore = useCartStore()
 
-const toppings = ref([
+const toppings = shallowRef([
     { name: "Tomatos", price: 0.70, icon: IconsTomato },
     { name: "Onions", price: 0.70, icon: IconsOnion },
     { name: "Bacon", price: 2.50, icon: IconsBacon },
@@ -15,6 +16,7 @@ const toppings = ref([
 </script>
 
 <template>
+    Extras: {{ cartStore.getTotal.toFixed(2) }} €
     <div class="grid grid-cols-2 lg:grid-cols-4 w-fit gap-4 ">
         <div v-for="top in toppings">
             <Toppings :name=top.name :price=top.price :icon=top.icon />
