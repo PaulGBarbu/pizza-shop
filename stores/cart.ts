@@ -22,15 +22,8 @@ export const useCartStore = defineStore('cart', {
       this.dough.name = name
       this.dough.price = price
     },
-    addTopping(name: string, price: number) {
-      this.toppings.push({
-        name: name,
-        price: price
-      })
-    },
-    removeToppings(name: string) {
-      // Remove the entry with given name
-      this.toppings = this.toppings.filter(topping => topping.name !== name);
+    updateToppings(toppings: Ingredient[]) {
+      this.toppings = toppings
     }
   },
   getters: {

@@ -18,7 +18,6 @@ const doughs = shallowRef([
     { name: "Sourdough", price: 1.50, icon: IconsSourdough },
 ])
 
-
 const toppings = shallowRef([
     { name: "Tomatos", price: 0.70, icon: IconsTomato },
     { name: "Onions", price: 0.70, icon: IconsOnion },
@@ -28,6 +27,13 @@ const toppings = shallowRef([
     { name: "Cheese", price: 1.00, icon: IconsCheese },
     { name: "Pepperoni", price: 1.50, icon: IconsPepperoni },
 ])
+
+const selectedToppings = ref([])
+
+// Update the store when a topping is clicked
+watchEffect(() => {
+    cartStore.updateToppings(selectedToppings)
+})
 </script>
 
 <template>
@@ -52,8 +58,11 @@ const toppings = shallowRef([
     <h2 class="text-3xl font-bold mb-2 mt-8">Select Your Toppings</h2>
     <div class="grid grid-cols-2 lg:grid-cols-4 w-fit gap-4 ">
         <div v-for="top in toppings">
-            <Ingredient :name=top.name :price=top.price :icon=top.icon type="Topping" />
+            <label>
+                <input class="hidden" type="checkbox" :value=top v-model="selectedToppings">
+                <Ingredient :name=top.name :price=top.price :icon=top.icon name:top.name type="Topping" />
+            </label>
         </div>
     </div>
-    Extras: {{ cartStore.getTotal }} €
+    Extras: {{ cartStore.getTotal.toFixed(2) }} €
 </template>
