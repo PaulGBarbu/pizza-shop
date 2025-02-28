@@ -1,15 +1,16 @@
 <script setup>
+import { IconsBacon, IconsCheese, IconsGarlic, IconsMushroom, IconsOnion, IconsPepperoni, IconsTomato } from '#components';
 
-const greeting = ref('Hello from x')
+
 
 const toppings = ref([
-    { name: "Tomatos", price: 0.70, icon: "Tomato" },
-    { name: "Onions", price: 0.70, icon: "Onion" },
-    { name: "Bacon", price: 2.50, icon: "Bacon" },
-    { name: "Mushrooms", price: 0.50, icon: "Mushroom" },
-    { name: "Garlic", price: 0.70, icon: "Garlic" },
-    { name: "Cheese", price: 1.00, icon: "Cheese" },
-    { name: "Pepperoni", price: 1.50, icon: "Pepperoni" },
+    { name: "Tomatos", price: 0.70, icon: IconsTomato },
+    { name: "Onions", price: 0.70, icon: IconsOnion },
+    { name: "Bacon", price: 2.50, icon: IconsBacon },
+    { name: "Mushrooms", price: 0.50, icon: IconsMushroom },
+    { name: "Garlic", price: 0.70, icon: IconsGarlic },
+    { name: "Cheese", price: 1.00, icon: IconsCheese },
+    { name: "Pepperoni", price: 1.50, icon: IconsPepperoni },
 ])
 </script>
 

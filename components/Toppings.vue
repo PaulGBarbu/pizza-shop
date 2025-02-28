@@ -1,48 +1,30 @@
 <script setup lang="ts">
 
-// Unfortunally it seems like AutoImports dont work if the Component is not inside the template itself?
-// https://nuxt.com/docs/guide/directory-structure/components#dynamic-components
-import IconsMushroom from "./Icons/Mushroom"
-import IconsTomato from "./Icons/Tomato"
-import IconsOnion from "./Icons/Onion"
-import IconsBacon from "./Icons/Bacon"
-import IconsGarlic from "./Icons/Garlic"
-import IconsCheese from "./Icons/Cheese"
-import IconsPepperoni from "./Icons/Pepperoni"
-
-
 const props = defineProps({
     name: String,
     price: Number,
-    icon: String
+    icon: Object
 })
 
-const iconComponents = {
-    Mushroom: IconsMushroom,
-    Tomato: IconsTomato,
-    Onion: IconsOnion,
-    Bacon: IconsBacon,
-    Garlic: IconsGarlic,
-    Cheese: IconsCheese,
-    Pepperoni: IconsPepperoni
+const counterStore = useCounterStore()
+
+const isActive = shallowRef(false)
+function activate() {
+    isActive.value = !isActive.value
+    counterStore.increment()
 }
-
-// console.log(iconComponents.);
-
 
 </script>
 
 <template>
-    <button>
-        <div class="p-2 rounded-xl h-28 w-28 border-2 border-black hover:bg-gray-200">
+    <!-- TODO: Make Store filled with reciep in a sensical JSON format -->
+    {{ counterStore.count }}
+    <button @click="activate">
+        <div class="p-2 rounded-xl h-28 w-28 border-2 border-black hover:bg-orange-100"
+            :class="{ 'bg-pink-400': isActive }">
             <div class="flex justify-center">
-                <template v-if="iconComponents[props.icon]">
-                    <component :is="iconComponents[props.icon]" class="h-11 w-11" />
-                </template>
-                <!-- Fallback if I have no Icon for it (yet) -->
-                <template v-else>
-                    <IconsPlus class="h-11 w-11"></IconsPlus>
-                </template>
+                <component :is="props.icon" class="h-11 w-11" />
+
             </div>
             <div class="font-bold mt-2">
                 {{ props.name }}
