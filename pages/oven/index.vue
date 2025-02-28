@@ -1,8 +1,23 @@
 <script setup>
-import { IconsBacon, IconsCheese, IconsGarlic, IconsMushroom, IconsOnion, IconsPepperoni, IconsTomato } from '#components';
+import { IconsBacon, IconsCheese, IconsGarlic, IconsGlutenFree, IconsItalian, IconsMushroom, IconsNewYork, IconsOnion, IconsOven, IconsPepperoni, IconsPizzaOven, IconsSourdough, IconsTomato } from '#components';
 
 
 const cartStore = useCartStore()
+
+// After some research this is the best Pizza Distinction for American vs Italian Pizza I came up with  ¯\_(ツ)_/¯
+const styles = shallowRef([
+    { name: "Italian", price: 6.70, icon: IconsPizzaOven },
+    { name: "American", price: 5.70, icon: IconsOven },
+])
+
+// https://eu.gozney.com/blogs/news/types-of-pizza-dough
+const doughs = shallowRef([
+    { name: "Gluten Free", price: 1.00, icon: IconsGlutenFree },
+    { name: "Neapolitan", price: 1.20, icon: IconsItalian },
+    { name: "New Yorker", price: 1.00, icon: IconsNewYork },
+    { name: "Sourdough", price: 1.50, icon: IconsSourdough },
+])
+
 
 const toppings = shallowRef([
     { name: "Tomatos", price: 0.70, icon: IconsTomato },
@@ -16,10 +31,29 @@ const toppings = shallowRef([
 </script>
 
 <template>
-    Extras: {{ cartStore.getTotal.toFixed(2) }} €
-    <div class="grid grid-cols-2 lg:grid-cols-4 w-fit gap-4 ">
-        <div v-for="top in toppings">
-            <Ingredient :name=top.name :price=top.price :icon=top.icon />
+    <h2 class="text-3xl font-bold mb-2 mt-8">Select Your Style</h2>
+    <div>
+        <div class="grid grid-cols-2 w-fit gap-4 ">
+            <div v-for="style in styles">
+                <Ingredient :name=style.name :price=style.price :icon=style.icon type="Style" />
+            </div>
         </div>
     </div>
+
+    <h2 class="text-3xl font-bold mb-2 mt-8">Select Your Dough</h2>
+    <div>
+        <div class="grid grid-cols-2 lg:grid-cols-4 w-fit gap-4 ">
+            <div v-for="dough in doughs">
+                <Ingredient :name=dough.name :price=dough.price :icon=dough.icon type="Dough" />
+            </div>
+        </div>
+    </div>
+
+    <h2 class="text-3xl font-bold mb-2 mt-8">Select Your Toppings</h2>
+    <div class="grid grid-cols-2 lg:grid-cols-4 w-fit gap-4 ">
+        <div v-for="top in toppings">
+            <Ingredient :name=top.name :price=top.price :icon=top.icon type="Topping" />
+        </div>
+    </div>
+    Extras: {{ cartStore.getTotal }} €
 </template>

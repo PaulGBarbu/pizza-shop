@@ -8,8 +8,9 @@ interface Ingredient {
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
-    style: {} as Ingredient,
-    dough: {} as Ingredient,
+    // Price needs to be set to zero, otherwise the getTotal wont work properly
+    style: { price: 0 } as Ingredient,
+    dough: { price: 0 } as Ingredient,
     toppings: [] as Ingredient[],
   }),
   actions: {
@@ -34,7 +35,8 @@ export const useCartStore = defineStore('cart', {
   },
   getters: {
     getTotal: (state) => {
-      return state.toppings.reduce((total, item) => total = total + item.price, 0)
+      // Total Price: Style + Dough + Sum of all Ingredients
+      return state.style.price + state.dough.price + state.toppings.reduce((total, item) => total = total + item.price, 0)
     }
   }
 })

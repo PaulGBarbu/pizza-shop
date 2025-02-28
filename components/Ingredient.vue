@@ -9,22 +9,44 @@ const props = defineProps({
         type: Number,
         required: true
     },
-    icon: Object
+    icon: Object,
+    // Copied appraoch from, https://github.com/vuejs/vue/issues/7840#issuecomment-373638033
+    type: {
+        type: String,
+        validator: (val: string) => ['Style', 'Dough', 'Topping'].includes(val)
+    }
 })
 
 const cartStore = useCartStore()
 
 const isActive = shallowRef(false)
+
+
 function activate() {
 
-    // If was inactive, add ingredient, else add it to the cart
-    if (!isActive.value) {
-        console.log("Add");
-        cartStore.addTopping(props.name, props.price)
-    } else {
-        console.log("Remove");
-        cartStore.removeToppings(props.name)
+    if (props.type === "Style") {
+        console.log("Style Selected");
+        cartStore.selectStyle(props.name, props.price)
     }
+
+    if (props.type === "Dough") {
+        console.log("Dough Selected");
+        cartStore.selectDough(props.name, props.price)
+    }
+
+    if (props.type === "Topping") {
+        // If was inactive, add ingredient, else add it to the cart
+        if (!isActive.value) {
+            console.log("Topping added");
+            cartStore.addTopping(props.name, props.price)
+        } else {
+            console.log("Topping remove");
+            cartStore.removeToppings(props.name)
+        }
+    }
+
+
+    // Update the UI
     isActive.value = !isActive.value
 }
 
