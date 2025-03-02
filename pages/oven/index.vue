@@ -28,11 +28,18 @@ const toppings = shallowRef([
     { name: "Pepperoni", price: 1.50, icon: IconsPepperoni },
 ])
 
+const selectedStyle = ref()
+const selectedDough = ref()
 const selectedToppings = ref([])
 
-// Update the store when a topping is clicked
-watchEffect(() => {
+watch(selectedToppings, () => {
     cartStore.updateToppings(selectedToppings)
+})
+watch(selectedDough, () => {
+    cartStore.updateDough(selectedDough)
+})
+watch(selectedStyle, () => {
+    cartStore.updateStyle(selectedStyle)
 })
 </script>
 
@@ -41,7 +48,11 @@ watchEffect(() => {
     <div>
         <div class="grid grid-cols-2 w-fit gap-4 ">
             <div v-for="style in styles">
-                <Ingredient :name=style.name :price=style.price :icon=style.icon type="Style" />
+                <label>
+                    <input class="hidden" id="style" name="style" type="radio" :value="style" v-model="selectedStyle">
+                    <Ingredient :name=style.name :price=style.price :icon=style.icon type="Style"
+                        :active="style.name == selectedStyle?.name" />
+                </label>
             </div>
         </div>
     </div>
@@ -50,7 +61,11 @@ watchEffect(() => {
     <div>
         <div class="grid grid-cols-2 lg:grid-cols-4 w-fit gap-4 ">
             <div v-for="dough in doughs">
-                <Ingredient :name=dough.name :price=dough.price :icon=dough.icon type="Dough" />
+                <label>
+                    <input class="hidden" id="dough" name="dough" type="radio" :value="dough" v-model="selectedDough">
+                    <Ingredient :name=dough.name :price=dough.price :icon=dough.icon type="Dough"
+                        :active="dough.name == selectedDough?.name" />
+                </label>
             </div>
         </div>
     </div>
@@ -60,7 +75,8 @@ watchEffect(() => {
         <div v-for="top in toppings">
             <label>
                 <input class="hidden" type="checkbox" :value=top v-model="selectedToppings">
-                <Ingredient :name=top.name :price=top.price :icon=top.icon name:top.name type="Topping" />
+                <Ingredient :name=top.name :price=top.price :icon=top.icon name:top.name type="Topping"
+                    :active="selectedToppings.some(t => t.name === top.name)" />
             </label>
         </div>
     </div>

@@ -14,15 +14,14 @@ export const useCartStore = defineStore('cart', {
     toppings: [] as Ingredient[],
   }),
   actions: {
-    selectStyle(name: string, price: number) {
-      this.style.name = name
-      this.style.price = price
+    updateStyle(style: Ingredient) {
+      this.style = style
     },
-    selectDough(name: string, price: number) {
-      this.dough.name = name
-      this.dough.price = price
+    updateDough(dough: Ingredient) {
+      this.dough = dough
     },
     updateToppings(toppings: Ingredient[]) {
+      console.log("Update ehm... Toppings")
       this.toppings = toppings
     }
   },
