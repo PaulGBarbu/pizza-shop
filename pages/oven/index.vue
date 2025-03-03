@@ -32,6 +32,8 @@ const selectedStyle = ref()
 const selectedDough = ref()
 const selectedToppings = ref([])
 
+// I'm sure this could be improved, but I dont 100% understand watch/watchEffect and why watch with an array behave differently
+// All I know is that this version works, with the only downside of being more verbose. So for now I keep it.
 watch(selectedToppings, () => {
     cartStore.updateToppings(selectedToppings)
 })
@@ -79,15 +81,13 @@ function print2Console() {
     </div>
 
     <h2 class="text-3xl font-bold mb-2 mt-8">Select Your Dough</h2>
-    <div>
-        <div class="grid grid-cols-2 lg:grid-cols-4 w-fit gap-4 ">
-            <div v-for="dough in doughs">
-                <label>
-                    <input class="hidden" id="dough" name="dough" type="radio" :value="dough" v-model="selectedDough">
-                    <Ingredient :name=dough.name :price=dough.price :icon=dough.icon type="Dough"
-                        :active="dough.name == selectedDough?.name" />
-                </label>
-            </div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 w-fit gap-4 ">
+        <div v-for="dough in doughs">
+            <label>
+                <input class="hidden" id="dough" name="dough" type="radio" :value="dough" v-model="selectedDough">
+                <Ingredient :name=dough.name :price=dough.price :icon=dough.icon type="Dough"
+                    :active="dough.name == selectedDough?.name" />
+            </label>
         </div>
     </div>
 
@@ -103,85 +103,80 @@ function print2Console() {
     </div>
     <div class="mt-4 text-xl">
         Gesamtpreis: {{ cartStore.getTotal.toFixed(2) }} €
-        <!-- TODO: Error message if Style/Dough are not selected => Open Modal with Overview of price or sth -->
     </div>
     <div class="text-red-500 text-lg my-2" v-if="missingStyleOrDough">
-
         Please select a pizza style and dough before proceeding
     </div>
-    <div>
-        <UButton size="xl" @click="openModal">Order</UButton>
-    </div>
+    <UButton size="xl" @click="openModal">Order</UButton>
 
-    <div>
-        <UModal v-model="isOpen">
-            <div class="p-4">
-                <!-- Modal Header -->
-                <div class="flex items-center justify-between">
-                    <h3 class="text-3xl font-bold">
-                        Your Order
-                    </h3>
-                    <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1"
-                        @click="isOpen = false" />
-                </div>
-
-                <!-- Price Table -->
-                <table class="table-auto w-full mt-6">
-                    <!-- Header -->
-                    <thead>
-                        <tr class="text-lg border-b-2 w-full">
-                            <th class="w-3/4 text-start">Item</th>
-                            <th class="w-1/4 text-start">Price</th>
-                        </tr>
-                    </thead>
-
-                    <!-- Style -->
-                    <tbody>
-                        <tr>
-                            <th colspan="2" class="text-xl pt-3 text-start font-normal">Style</th>
-                        </tr>
-                        <tr class="border-b-2">
-                            <td>{{ selectedStyle.name || "Style" }}</td>
-                            <td>{{ selectedStyle.price.toFixed(2) }} €</td>
-                        </tr>
-                    </tbody>
-
-                    <!-- Dough -->
-                    <tbody>
-                        <tr>
-                            <th colspan="2" class="text-xl pt-3 text-start font-normal">Dough</th>
-                        </tr>
-                        <tr class="border-b-2">
-                            <td>{{ selectedDough.name }}</td>
-                            <td>{{ selectedDough.price.toFixed(2) }} €</td>
-                        </tr>
-                    </tbody>
-
-                    <!-- Toppings -->
-                    <tbody>
-                        <tr>
-                            <th colspan="2" class="text-xl pt-3 text-start font-normal">Toppings</th>
-                        </tr>
-                        <tr class="border-b-2" v-for="top in selectedToppings">
-                            <td>{{ top.name }}</td>
-                            <td>{{ top.price.toFixed(2) }} €</td>
-                        </tr>
-                    </tbody>
-
-                    <!-- Total Price -->
-                    <tfoot class="font-bold">
-                        <tr>
-                            <th class="text-start">Total</th>
-                            <td>{{ cartStore.getTotal.toFixed(2) }} €</td>
-                        </tr>
-                    </tfoot>
-                </table>
-
-                <!-- Order Button -->
-                <div class="mt-4 flex justify-center">
-                    <UButton size="xl" @click="print2Console">Bestellen</UButton>
-                </div>
+    <UModal v-model="isOpen">
+        <div class="p-4">
+            <!-- /* ---------------------------------------- Modal Header ---------------------------------------- */ -->
+            <div class="flex items-center justify-between">
+                <h3 class="text-3xl font-bold">
+                    Your Order
+                </h3>
+                <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1"
+                    @click="isOpen = false" />
             </div>
-        </UModal>
-    </div>
+
+            <!-- /* ----------------------------------------- Price Table ---------------------------------------- */ -->
+            <!-- Price Table -->
+            <table class="table-auto w-full mt-6">
+                <!-- Header -->
+                <thead>
+                    <tr class="text-lg border-b-2 w-full">
+                        <th class="w-3/4 text-start">Item</th>
+                        <th class="w-1/4 text-start">Price</th>
+                    </tr>
+                </thead>
+
+                <!-- Style -->
+                <tbody>
+                    <tr>
+                        <th colspan="2" class="text-xl pt-3 text-start font-normal">Style</th>
+                    </tr>
+                    <tr class="border-b-2">
+                        <td>{{ selectedStyle.name || "Style" }}</td>
+                        <td>{{ selectedStyle.price.toFixed(2) }} €</td>
+                    </tr>
+                </tbody>
+
+                <!-- Dough -->
+                <tbody>
+                    <tr>
+                        <th colspan="2" class="text-xl pt-3 text-start font-normal">Dough</th>
+                    </tr>
+                    <tr class="border-b-2">
+                        <td>{{ selectedDough.name }}</td>
+                        <td>{{ selectedDough.price.toFixed(2) }} €</td>
+                    </tr>
+                </tbody>
+
+                <!-- Toppings -->
+                <tbody>
+                    <tr>
+                        <th colspan="2" class="text-xl pt-3 text-start font-normal">Toppings</th>
+                    </tr>
+                    <tr class="border-b-2" v-for="top in selectedToppings">
+                        <td>{{ top.name }}</td>
+                        <td>{{ top.price.toFixed(2) }} €</td>
+                    </tr>
+                </tbody>
+
+                <!-- Total Price -->
+                <tfoot class="font-bold">
+                    <tr>
+                        <th class="text-start">Total</th>
+                        <td>{{ cartStore.getTotal.toFixed(2) }} €</td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <!-- /* ---------------------------------------- Order Button ---------------------------------------- */ -->
+            <div class="mt-4 flex justify-center">
+                <UButton size="xl" @click="print2Console">Bestellen</UButton>
+            </div>
+        </div>
+    </UModal>
 </template>
