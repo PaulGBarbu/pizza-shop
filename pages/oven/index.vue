@@ -72,9 +72,9 @@ function print2Console() {
 </script>
 
 <template>
-    <div class="container max-w-[768px] px-2 mx-auto">
+    <div class="container max-w-[768px] px-2 mx-auto py-8">
         <!-- /* --------------------------------------- Style Selector --------------------------------------- */ -->
-        <h2 class="text-3xl font-bold mb-2 mt-8">Select Your Style</h2>
+        <h2 class="text-3xl font-bold mb-2 pt-8">Select Your Style</h2>
         <div>
             <div class="grid grid-cols-2 gap-4">
                 <div v-for="style in styles">
@@ -125,7 +125,9 @@ function print2Console() {
         </div>
 
         <!-- /* -------------------------------------------- Modal ------------------------------------------- */ -->
-        <UButton size="xl" @click="openModal">Order</UButton>
+        <div class="flex justify-center">
+            <UButton size="xl" @click="openModal" class="text-xl mt-4 block w-full md:w-1/2">Order</UButton>
+        </div>
         <UModal v-model="isOpen">
             <div class="p-4">
                 <!-- /* ---------------------------------------- Modal Header ---------------------------------------- */ -->
@@ -192,7 +194,7 @@ function print2Console() {
 
                 <!-- /* ---------------------------------------- Order Button ---------------------------------------- */ -->
                 <div class="mt-4 flex justify-center">
-                    <UButton size="xl" @click="print2Console">Bestellen</UButton>
+                    <UButton size="xl" @click="print2Console">Order Now</UButton>
                 </div>
             </div>
         </UModal>
