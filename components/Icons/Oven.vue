@@ -1,6 +1,6 @@
 <template>
-    <svg fill="#000000" width="256px" height="256px" viewBox="0 0 50.00 50.00" xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink" stroke="#000000" stroke-width="0.0005">
+    <svg fill="currentColor" width="256px" height="256px" viewBox="0 0 50.00 50.00" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" stroke="currentColor" stroke-width="0.0005">
         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC"
             stroke-width="0.1"></g>

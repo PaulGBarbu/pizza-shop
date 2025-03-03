@@ -21,11 +21,11 @@ const props = defineProps({
     }
 })
 </script>
-
+<!-- bg-red-200 w-1/2 h-1/2 -->
 <template>
-    <div class="cursor-pointer">
-        <div class="p-2 rounded-xl h-28 w-28 border-2 border-black group"
-            :class="{ 'bg-pink-400 hover:bg-pink-400': props.active }">
+    <div class="cursor-pointer size-full">
+        <div class="w-full h-full p-2 rounded-xl border-2 border-black group"
+            :class="{ 'bg-primary-400 hover:bg-primary-400': props.active }">
             <div class="flex justify-center group-hover:scale-125 group-hover:rotate-12 transition duration-200">
                 <component :is="props.icon" class="h-11 w-11 " />
             </div>
@@ -37,4 +37,5 @@ const props = defineProps({
             </div>
         </div>
     </div>
+
 </template>
