@@ -156,8 +156,8 @@ function print2Console() {
                             <th colspan="2" class="text-xl pt-3 text-start font-normal">Style</th>
                         </tr>
                         <tr class="border-b-2">
-                            <td>{{ selectedStyle.name || "Style" }}</td>
-                            <td>{{ selectedStyle.price.toFixed(2) }} €</td>
+                            <td>{{ cartStore.style.name }}</td>
+                            <td>{{ cartStore.style.price.toFixed(2) }} €</td>
                         </tr>
                     </tbody>
 
@@ -167,8 +167,8 @@ function print2Console() {
                             <th colspan="2" class="text-xl pt-3 text-start font-normal">Dough</th>
                         </tr>
                         <tr class="border-b-2">
-                            <td>{{ selectedDough.name }}</td>
-                            <td>{{ selectedDough.price.toFixed(2) }} €</td>
+                            <td>{{ cartStore.dough.name }}</td>
+                            <td>{{ cartStore.dough.price.toFixed(2) }} €</td>
                         </tr>
                     </tbody>
 
@@ -177,7 +177,7 @@ function print2Console() {
                         <tr>
                             <th colspan="2" class="text-xl pt-3 text-start font-normal">Toppings</th>
                         </tr>
-                        <tr class="border-b-2" v-for="top in selectedToppings">
+                        <tr class="border-b-2" v-for="top in cartStore.toppings">
                             <td>{{ top.name }}</td>
                             <td>{{ top.price.toFixed(2) }} €</td>
                         </tr>
