@@ -1,3 +1,7 @@
+<script setup>
+useHead({ title: "Distopizza" })
+</script>
+
 <template>
     <div class="h-[100vh] bg-[url(/bg.jpg)] bg-center bg-cover">
         <div class="backdrop-brightness-50 h-full text-white">
@@ -8,13 +12,16 @@
                     today!
                 </div>
 
-                <p class="text-shadow text-xl mt-8">Tired of mediocre pizza? Longing for a dining experience that feels
+                <p class="text-shadow text-xl mt-8 text-justify">Tired of mediocre pizza? Longing for a dining
+                    experience that feels
                     like
                     it was
                     designed by a robot
                     overlord? Look no further than Dystopizza, where the future of food is now.</p>
+                <div class="flex justify-center">
 
-                <UButton class="mt-12 p-2 text-2xl rounded-xl" to="/oven">Order Your Pizza Now</UButton>
+                    <UButton class="mt-12 p-4 text-2xl rounded-xl" to="/oven">Order Your Pizza Now</UButton>
+                </div>
             </div>
         </div>
     </div>

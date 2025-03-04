@@ -1,6 +1,6 @@
 <script setup>
 import { IconsBacon, IconsCheese, IconsGarlic, IconsGlutenFree, IconsItalian, IconsMushroom, IconsNewYork, IconsOnion, IconsOven, IconsPepperoni, IconsPizzaOven, IconsSourdough, IconsTomato } from '#components';
-
+useHead({ title: "Distopizza - Oven" })
 const cartStore = useCartStore()
 
 // After some research this is the best Pizza Distinction for American vs Italian Pizza I came up with (Refering to the Icons)  ¯\_(ツ)_/¯
